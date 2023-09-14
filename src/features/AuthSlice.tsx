@@ -29,7 +29,6 @@ export const createUser = createAsyncThunk(
   "user/createUser",
   async ({ login, password, nickName, avatarURL }: User, thunkAPI) => {
     try {
-        console.log(login,password,nickName, avatarURL);
       const res = await fetch(`http://localhost:4000/user`, {
         method: "POST",
         headers: {
@@ -42,6 +41,8 @@ export const createUser = createAsyncThunk(
       if(json.error){
         return thunkAPI.rejectWithValue(json.error)
       }
+      console.log(json);
+      
       return json
     //   return res.json("Авторизация прошла успешно");
     } catch (e) {
@@ -65,12 +66,12 @@ export const authlogin = createAsyncThunk<string, User>(
         body: JSON.stringify({ login, password }),
       });
       const token = await res.json();
-      console.log(token);
 
       if (token.error) {
         return thunkAPI.rejectWithValue(token.error);
       }
       localStorage.setItem("token", token);
+      return token
     } catch (e) {
       thunkAPI.rejectWithValue(e);
     }
@@ -105,8 +106,8 @@ const authSlice = createSlice({
       })
       .addCase(authlogin.fulfilled, (state, action) => {
         state.loged = true;
+        console.log(action)
         state.error = null;
-
         state.token = action.payload;
       });
   },
