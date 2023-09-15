@@ -6,6 +6,7 @@ import Login from "./components/authorization/login";
 import style from "./css/app.module.css";
 import FullPost from "./pages/HomePage/FullPostPage";
 import AddPost from "./components/AddPosts/AddPost";
+import "tailwindcss/tailwind.css";
 function App() {
   return (
     <div className={style.app}>

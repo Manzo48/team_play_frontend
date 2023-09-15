@@ -21,12 +21,12 @@ const Post: React.FC = () => {
             key={post._id}
             className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 bg-white rounded-lg shadow-md p-4 mb-4 mx-2 py-2"
           >
-            <img src={post.imageURL} alt="*" className="w-full h-auto" />
+            <img src={post.imageURL} alt="*" className="w-full h-auto"  />
             <h1 className="text-lg sm:text-xl font-semibold mt-2">
-              {post.title.length > 20 ? `${post.title.slice(0,20)}...`: post.title}
+              {post.title && post.title.length > 20 ? `${post.title.slice(0,20)}...`: post.title}
             </h1>
             <p className="text-sm sm:text-base text-gray-600">
-              {post.desc.length > 100
+              {post.desc && post.desc.length > 100
                 ? `${post.desc.slice(0, 50)}...`
                 : post.desc}
             </p>

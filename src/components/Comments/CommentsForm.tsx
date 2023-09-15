@@ -1,11 +1,10 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-// import style from "./FormComments.module.css";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import { AppDispatch } from "../../app/store";
 import { addComment } from "../../features/CommentSlice";
 import { useDispatch } from "react-redux";
 
 interface CommentsFormProps {
-  postId: string; // Принимаем postId как пропс
+  postId: string;
   onSubmit: () => void;
 }
 
@@ -21,12 +20,9 @@ function FormComments({ postId, onSubmit }: CommentsFormProps) {
         return;
       }
 
-      // Отправка данных комментария с postId
       await dispatch(addComment({ postId, text }));
-
-      // Очистите поле ввода комментария после успешного добавления
       setText("");
-      onSubmit(); // Вызываем onSubmit, чтобы обновить список комментариев
+      onSubmit();
     } catch (error) {
       // Обработка ошибок
     }
@@ -34,7 +30,7 @@ function FormComments({ postId, onSubmit }: CommentsFormProps) {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
-    setError(""); // Сбрасываем ошибку при изменении текста
+    setError("");
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -43,25 +39,24 @@ function FormComments({ postId, onSubmit }: CommentsFormProps) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <div>
-            <input
-              type="text"
-              placeholder="Write your comment here..."
-              value={text}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <button type="submit" onClick={handleSubmit}>
-              ADD
-            </button>
-          </div>
-        </div>
-      </form>
-      {error && <p>{error}</p>}
+    <div className="bg-white p-4 md:w-2/3 mx-auto my-10 rounded-lg shadow-md">
+      <div className="flex flex-col md:flex-row items-center md:space-x-2">
+        <input
+          type="text"
+          placeholder="Write your comment here..."
+          value={text}
+          onChange={handleChange}
+          className="flex-1 px-2 py-1 md:py-2 border rounded-lg focus:outline-none"
+        />
+        <button
+          type="submit"
+          onClick={handleSubmit}
+          className="mt-2 md:mt-0 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none"
+        >
+          ADD
+        </button>
+      </div>
+      {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
   );
 }
