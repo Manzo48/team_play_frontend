@@ -1,15 +1,22 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { authlogin } from "../../features/AuthSlice";
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function logRoom(){
-    // const getTok = useSelector((state: RootState)=> state.authSlice.token);
+    const navigate = useNavigate();
+
+    const handleLogOut = ()=>{
+        
+        localStorage.removeItem("token");
+        navigate("/auth")
+    }
 return(
 <>
     <div>
         {/* <div><img src={state.avatarURL} alt="фото профиля" /></div> */}
         <div>Личный кабинет</div>
+        <div>
+            <button onClick={handleLogOut} >выйти из аккаунта</button>
+        </div>
     </div>
 </>
 )
