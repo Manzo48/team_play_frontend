@@ -45,14 +45,6 @@ try {
   const { data} = await axios.post('http://localhost:4000/upload/img', formData)
 setimgUrl(`http://localhost:4000${data.url}`)
 
-
-
-
-
-
-
- 
-  
   
 } catch (error) {
   error
@@ -68,15 +60,6 @@ setPdfUrl(`http://localhost:4000${data.url}`)
 console.log(pdfUrl);
 
 
-
-
-// ll
-
-
-
- 
-  
-  
 } catch (error) {
   error
 }
